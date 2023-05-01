@@ -1,6 +1,7 @@
 {% extends 'tasks/layout.html' %}
 {% block body %}
     <h1>Add Task</h1>
+    #TODO: make it point towards the database.
     <form action="{% url 'tasks:add' %}" method="post">
         {% csrf_token %}
         <input type="text" name="task">
@@ -8,4 +9,3 @@
     </form>
     <a href="{% url 'tasks:index' %}">View Tasks</a>
 {% endblock %}
-i 
