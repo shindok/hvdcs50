@@ -1,27 +1,10 @@
 from django.shortcuts import render
+from .models import Task
 from django import forms
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-from .models import Task
-
-
 # Create your views here.
-<<<<<<< HEAD
-
-
-def index(request):
-
-    tasks = Task.objects.all();
-
-    return render(request, "tasks/index.html", {"tasks": tasks})
-
-def add_task(request):
-
-    return render(request, "tasks/add.html")
-=======
-# tasks = []
-
 class NewTaskForm(forms.Form):
     task = forms.CharField(label="New Task")
     #clientside validation
@@ -34,15 +17,14 @@ def index(request):
         "tasks": request.session["tasks"]
         })
 
-def add(request):
-    # serverside validation
+def add_task(request):
     if request.method == "POST":
-        form = NewTaskForm(request.POST)
+        form = TaskForm(request.POST)
         if form.is_valid():
-            task = form.cleaned_data["task"]
-            request.session["tasks"]+=[task]
-            return HttpResponseRedirect(reverse("tasks:index"))
+            task = form.save(commit=False)
+            # TODO: task.creator = request.user
+            task.save()
+            return redirect("tasks:index") # TODO: include success message
         else:
-            return render(request, "tasks/add.html", {"form": form})
-    return render(request, "tasks/add.html", {"form": NewTaskForm()})
->>>>>>> main
+            form = TaskForm()
+    return render(request, "tasks/add.html")
