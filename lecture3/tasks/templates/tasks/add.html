@@ -1,8 +1,7 @@
 {% extends 'tasks/layout.html' %}
 {% block body %}
     <h1>Add Task</h1>
-    #TODO: make it point towards the database.
-    <form action="{% url 'tasks:add' %}" method="post">
+    <form action="{% url 'tasks:add_task' %}" method="post">
         {% csrf_token %}
         {{ form }}
         <input type="submit">
