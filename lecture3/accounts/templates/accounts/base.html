@@ -3,9 +3,9 @@
     <header>
         <nav>
             <ul>
-                <li><a href="{% url 'accounts:profile' %}">Profile</a></li>
                 {% if user.is_authenticated %}
-                <li><a href="{% url 'logout' %}">Logout</a></li>
+                <li><a href="{% url 'accounts:profile' request.user.username %}">Profile</a></li>
+                <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
                 {% else %}
                 <li><a href="{% url 'accounts:login' %}">Login</a></li>
                 {% endif %}

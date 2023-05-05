@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
 from django.utils import timezone
 
-class CustomUserManager(BaseUserManager):
+class CustomUserManager(BaseUserManager): #TODO: refactor this out as managers.py
     # this list should be correspond with the CustomUser's fields
     allowed_fields = ['first_name', 'last_name', 'username','email', 'password']
 
